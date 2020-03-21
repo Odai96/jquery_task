@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<style>
+h1
+{
+text-align:center;
+}
+#rating,#add {
+ margin-left: 1em
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align:center ;
+  margin-left: 7em;
+  /*background-color:rgb(238, 238, 238);*/
+}
+.remove
+{
+    background-color:red;
+    color:white;
+    width:80%;
+}
+/* Sortable tables */
+/*table.sortable thead {/*
+    /*background-color:rgb(238, 238, 238);*/
+    /*color:#666666;*/
+   /* font-weight: bold;*/
+    /*cursor: default;*/
+/*}*/
+</style>
+<script src="sorttable.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    var i=1
+    function Add()
+    {
+        let title=jQuery("#title").val()
+        let rate=jQuery("#rate").val()
+        if (title=="")
+        {
+            alert("Title must be a text!");
+        }
+        if(jQuery.isNumeric(rate)&&rate>=0&&rate<=10)
+        {
+            $('table').append('<tr id='+i+'><td>'+title+'</td><td>'+rate+'</td><td><input type="button" class="remove" value="Delete" onclick="DeleteRow('+i+')"></input></td></tr>');
+            i++;
+        }
+        else
+        {
+            alert("you must insert numeric rate bewteen 0 and 10");
+        }
+    }
+    function DeleteRow(id)
+    {
+        jQuery('#'+id).remove();
+    }
+</script>
+<body>
+<h2>Odai Hardan</h2>
+<h1>My Favorite Movies</h1>
+<form>
+  <label for="fname">Title:</label>
+  <input type="text" id="title" placeholder="Movie Ttile">
+  <label for="lname" id="rating">Rating:</label>
+  <input type="text" id="rate" placeholder="Rate the movie for 0 to 10"></input>
+  <input type="button" id="add" value="Add Movie" onclick="Add()"></input>
+</form>
+<br>
+<br>
+<table class="sortable" style="width:80%">
+    <tr>
+      <th width="50%">Title</th>
+      <th width="10%">Rating</th> 
+      <th width="10%">Delete</th>
+    </tr>
+  </table>
+</body>
+</html>
